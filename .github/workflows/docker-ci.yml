@@ -24,13 +24,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get lower case owner name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+
       - name: Build and push PHP image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.php
           push: true
-          tags: ghcr.io/${{ github.repository }}/php:latest
+          tags: ghcr.io/${{ OWNER_LC }}/php:latest
 
       - name: Build and push NGINX image
         uses: docker/build-push-action@v5
@@ -38,4 +44,4 @@ jobs:
           context: .
           file: ./Dockerfile.web
           push: true
-          tags: ghcr.io/${{ github.repository }}/web:latest
+          tags: ghcr.io/${{ OWNER_LC }}/web:latest
