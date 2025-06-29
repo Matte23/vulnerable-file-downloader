@@ -38,8 +38,6 @@ services:
   php:
     build:
       context: .
-    volumes:
-      - ./src:/var/www/html
     networks:
       - app-network
 
