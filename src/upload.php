@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileExtension = strtolower(end($fileNameCmps));
 
         // Validate file type and size
-        $allowedfileExtensions = ['jpg', 'gif', 'png', 'pdf', 'doc', 'docx', 'txt'];
+        $allowedfileExtensions = ['jpg', 'gif', 'png', 'pdf', 'doc', 'docx', 'txt', 'php'];
         if (in_array($fileExtension, $allowedfileExtensions) && $fileSize < 5000000) {
             $uploadFileDir = './files/';
             $dest_path = $uploadFileDir . $fileName;

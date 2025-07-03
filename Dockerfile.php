@@ -9,8 +9,5 @@ WORKDIR /var/www/html
 # Copy the PHP source code
 COPY src/ .
 
-# Expose the port the app runs on
-EXPOSE 80
-
 # Start the PHP-FPM server
 CMD ["php-fpm"]

@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile.php
     volumes:
-      - ./src:/var/www/html
+      - ./uploads:/var/www/html/files
     networks:
       - app-network
 

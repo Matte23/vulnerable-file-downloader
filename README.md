@@ -28,7 +28,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:Z
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
@@ -36,16 +36,14 @@ services:
       retries: 3
 
   php:
-    build:
-      context: .
+    image: ghcr.io/matte23/vulnerable-file-downloader/php:latest
+    volumes:
+      - ./uploads:/var/www/html/files
     networks:
       - app-network
 
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./src:/var/www/html
+  web:
+    image: ghcr.io/matte23/vulnerable-file-downloader/web:latest 
     ports:
       - "5000:80"
     networks:
